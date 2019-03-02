@@ -1,0 +1,164 @@
+/// Buttons
+
+.c-btn {
+  @include btn-base;
+
+  &:focus,
+  &-focus {
+    @include btn-focus;
+  }
+
+  &:active,
+  &-active {
+    @include btn-active;
+  }
+
+  &-disabled,
+  &[disabled] {
+    @include btn-disabled;
+  }
+
+  &-primary {
+    @include btn-style($btn-primary-bg, $btn-primary-hover);
+
+    &-outline {
+      @include btn-outline($btn-primary-bg);
+    }
+
+    &-disabled,
+    &[disabled] {
+      @include btn-disabled($btn-primary-disabled);
+    }
+  }
+
+  &-secondary,
+  &-default {
+    @include btn-secondary($btn-secondary-bg);
+
+    &-outline {
+      @include btn-outline($color-gray-7);
+    }
+
+    &-disabled,
+    &[disabled] {
+      @include btn-disabled($btn-disabled-bg, $btn-disabled-bd, $btn-disabled-c, $btn-disabled-text-shadow);
+    }
+  }
+
+  &-success {
+    @include btn-style($btn-success-bg, $btn-success-hover);
+
+    &-outline {
+      @include btn-outline($btn-success-bg);
+    }
+
+    &-disabled,
+    &[disabled] {
+      @include btn-disabled($btn-success-disabled);
+    }
+  }
+
+  &-danger {
+    @include btn-style($btn-danger-bg, $btn-danger-hover);
+
+    &-outline {
+      @include btn-outline($btn-danger-bg);
+    }
+
+    &-disabled,
+    &[disabled] {
+      @include btn-disabled($btn-danger-disabled);
+    }
+  }
+
+  @if $btn-active-selected {
+    @include btn-active-selected;
+  }
+
+  &-table-icon {
+    @include btn-table-icon;
+  }
+}
+
+.c-btn-link {
+  @include btn-base;
+
+  color: $primary;
+  box-shadow: none;
+  font-weight: $btn-link-font-weight;
+
+  &:hover {
+    color: lighten($primary, 10);
+  }
+
+  &:active {
+    color: darken($primary, 10);
+    box-shadow: none;
+  }
+
+  &-disabled {
+    &,
+    &:hover,
+    &:focus,
+    &:active {
+      background: transparent;
+      color: $btn-disabled-c;
+      line-height: 1;
+      cursor: not-allowed;
+      appearance: none;
+      box-shadow: none;
+      opacity: $btn-disabled-opacity;
+    }
+  }
+}
+
+
+.c-btn,
+.c-btn-link {
+  &-xs {
+    @include btn-size(xs);
+  }
+
+  &-sm {
+    @include btn-size(sm);
+  }
+
+  &-lg {
+    @include btn-size(lg);
+  }
+
+  &-xl {
+    @include btn-size(xl);
+  }
+}
+
+.c-btn-block {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+//TODO cleaner approach
+.c-btn-secondary.c-btn-active {
+  box-shadow: $btn-shadow-active;
+}
+
+.c-btn-link {
+  &-secondary,
+  &-default {
+    @include btn-link-style($color-gray-7);
+  }
+
+  &-success {
+    @include btn-link-style($success);
+  }
+
+  &-danger {
+    @include btn-link-style($danger);
+  }
+
+  &[disabled] {
+    opacity: 0.8;
+    color: $btn-disabled-c;
+  }
+}

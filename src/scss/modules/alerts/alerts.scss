@@ -1,0 +1,64 @@
+// Alerts
+
+@import 'mixins';
+@import 'toast-alerts-mixins';
+
+.c-alert {
+  @include alert-base;
+
+  &-primary {
+    @include alert-style($alert-primary-bg, $alert-primary-color);
+  }
+
+  &-danger {
+    @include alert-style($alert-danger-bg, $alert-danger-color);
+  }
+
+  &-warning {
+    @include alert-style($alert-warning-bg, $alert-warning-color);
+  }
+
+  &-success {
+    @include alert-style($alert-success-bg, $alert-success-color);
+  }
+
+  &-sm {
+    @include alert-size(0.25rem);
+  }
+
+  &-lg {
+    @include alert-size(1rem);
+  }
+}
+
+.c-alert-top {
+  border-radius: 0;
+  padding: $alert-top-padding;
+  border-left-width: 0;
+  border-right-width: 0;
+  border-top-width: 0;
+  margin-bottom: 0;
+}
+
+
+.c-toast-alert {
+  @include toast-alert;
+
+  &-danger {
+    @include toast-alert-style($toast-alert-danger-color, $toast-alert-danger-bar-bd, $toast-alert-danger-bar-bg);
+  }
+
+  &-warning {
+    @include toast-alert-style($toast-alert-warning-color, $toast-alert-warning-bar-bd, $toast-alert-warning-bar-bg);
+  }
+
+  &-success {
+    @include toast-alert-style($toast-alert-success-color, $toast-alert-success-bar-bd, $toast-alert-success-bar-bg);
+    @include taost-alert-success-icon;
+  }
+
+  &-info {
+    @include toast-alert-style($toast-alert-info-color, $toast-alert-info-bar-bd, $toast-alert-info-bar-bg);
+    @include toast-alert-info-icon;
+  }
+}

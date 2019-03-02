@@ -1,0 +1,567 @@
+// **** LOCK SCREEN ****
+.lock-screen-background {
+  background: url("../images/lock-screen.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.lock-screen-notification{
+  border-radius: 10px;
+}
+
+.notification-body{
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+// **** IOS KEYBOARD MODAL
+.ios-keyboard-image{
+  background: url("../images/ios-keyboard.png");
+}
+
+// *** HIDDEN DEALS ****
+
+// .recover-deal{
+//   background: #ccedff;
+// }
+
+
+
+
+
+
+// **** LOGIN SCREEN ****
+
+.loginBackground {
+  background: url("../images/bg-login.jpg");
+  background-size: cover;
+}
+
+.logo {
+  // border: 1px dashed black;
+  height: 29.85px;
+  width: 99.16px;
+}
+
+.c-input {
+  border: none;
+  outline: none;
+  box-shadow: none;
+  border-bottom: solid 1px #dee2e6;
+}
+// **** END LOGIN SCREEN ****
+// **** LIVE-DEALS.HTML ****
+/**** TABS ****/
+.tabs-mobile {
+  background-color: #F8F9FA;
+  box-shadow: none;
+
+  .c-tab-item {
+    flex-grow: 1;
+
+    &-link {
+      box-shadow: inset 0 1px 0 0 #DEE2E6, inset -1px 0 0 0 #F1F3F5;
+      border: none;
+
+      &-active {
+        background-color: #ffffff;
+      }
+
+      &:hover {
+        border: none;
+      }
+    }
+  }
+}
+
+// ****review-and-confirm.html****
+.review-and-confirm-label{
+  font-weight: 200;
+}
+
+input .review-and-confirm-input{
+  font-weight: 600;
+  color: black;
+}
+
+/**** HEADER ****/
+.header-fixed {
+  left: 0;
+  top: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+
+  .btn-header {
+    color: #1C7CD6;
+    font-size: 24px;
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .c-input {
+    background-color: #E9ECEF;
+    border: none;
+    border-radius: 7px;
+    box-shadow: none;
+  }
+
+  .c-tabs {
+    .c-tab-item {
+      &-link {
+        font-size: 13px;
+        font-weight: normal;
+        padding: 10px;
+      }
+    }
+  }
+}
+
+.header-nav {
+  position: relative;
+  height: 38px;
+  width: 100%;
+
+  .c-tabs {
+    box-shadow: none;
+    font-weight: normal;
+    left: 0;
+    right: 0;
+    margin: 0;
+    position: absolute;
+    overflow-x: auto;
+    width: 100%;
+
+    .c-tab-item {
+      padding: 0;
+
+      &-link {
+        padding: 0;
+      }
+    }
+  }
+}
+/**** CONTENT ****/
+
+.content-mobile {
+  overflow: hidden;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  position: absolute;
+  width: 100%;
+
+  .content-scroll {
+    left: 0;
+    bottom: 46px;
+    top: 0;
+    position: absolute;
+    overflow-y: auto;
+    // margin-top: 110px;
+    width: 100%;
+  }
+}
+/**** FOOTER ****/
+
+.footer-mobile {
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+}
+/**** DEALS LIST ****/
+
+.list-deals {
+  .c-media {
+    height: 50px;
+    padding: 0;
+  }
+
+  .media-button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+#message-table {
+  font-family: monospace;
+}
+
+// KEYBOARD Modal
+
+.keyboard-modal {
+  background-color: #fefefe;
+  position: fixed;
+  // z-index: 1;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 240px;
+  transform: translateY(390px);
+  transition: all 300ms ease;
+  z-index: 11;
+
+}
+
+
+
+
+
+/* The Modal (background) */
+
+.modal {
+  background-color: #fefefe;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 390px;
+  transform: translateY(390px);
+  transition: all 300ms ease;
+  z-index: 11;
+
+  &-open {
+    transform: translateY(0);
+  }
+
+  &-overlay {
+    background-color: rgba(0,0,0,0.4);
+    display: none;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9;
+    transition: all 300ms ease;
+    &-open {
+      display: block;
+    }
+  }
+}
+
+.success-overlay {
+  background-color: rgba(0,0,0,0.4);
+  color: #ffffff;
+  display: none;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9;
+  transition: all 300ms ease;
+  &-open {
+    display: flex;
+    align-items: center;
+  }
+}
+
+
+.close:focus,
+.close:hover {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+}
+
+.modal-body {
+  padding: 2px 16px;
+}
+/* Add Animation */
+@-webkit-keyframes slideIn {
+  from {
+    bottom: -300px;
+    opacity: 0;
+  }
+
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
+}
+@keyframes slideIn {
+  from {
+    bottom: -300px;
+    opacity: 0;
+  }
+
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+#overlay {
+  position: fixed;
+  /* Sit on top of the page content */
+  display: none;
+  /* Hidden by default */
+  width: 100%;
+  /* Full width (cover the whole page) */
+  height: 100%;
+  /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  /* Black background with opacity */
+  z-index: 2;
+  /* Specify a stack order in case you're using a different order for other elements */
+  cursor: pointer;
+  /* Add a pointer on hover */
+}
+
+#text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 50px;
+  color: white;
+  transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+}
+/* Floating Labels */
+.is-floating-label {
+  position: relative;
+  margin-bottom: 15px;
+  height: 50px;
+
+  input.c-input {
+    padding-bottom: 25px;
+    padding-top: 25px;
+    position: absolute;
+    background-color: transparent;
+  }
+
+  .label-in-floating-label-no-icon {
+    font-size: 14px;
+    opacity: 0.6;
+    pointer-events: none;
+    position: absolute;
+    transform: translate3d(0, 0, 0) scale(1);
+    transform-origin: left top;
+    transition: 100ms;
+    top: 18px;
+    left: 10px;
+  }
+
+  .label-in-floating-label {
+    font-size: 14px;
+    opacity: 0.6;
+    pointer-events: none;
+    position: absolute;
+    transform: translate3d(0, 0, 0) scale(1);
+    transform-origin: left top;
+    transition: 100ms;
+    top: 18px;
+    left: 30px;
+  }
+
+  &.is-focused label {
+    font-weight: bold;
+    transform: translateY(-20px) scale(0.75);
+  }
+}
+// Swipe Left Action
+.list {
+  display: flex;
+  flex-direction: column;
+  width: 372px;
+  position: relative;
+  overflow: hidden;
+}
+
+.list-item {
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  height: 50px;
+  transition: all 150ms ease;
+}
+
+.list-item-show-action {
+  transform: translateX(-50px);
+}
+
+.list-item-show-action-recovery {
+  transform: translateX(-80px);
+}
+
+.list-item-content {}
+
+.list-item-remove {
+  background-color: red;
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  right: -51px;
+}
+
+ .list-item-recover-deal{
+  background-color: #72c3fc;
+  height: 50px;
+  width: 80px;
+  position: absolute;
+  right: -80px;
+}
+
+
+
+
+
+.list-item-fake-click {
+  border-bottom: 1px solid #ced4da;
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  right: 0;
+}
+// Activity-Stream Swipe Left Action
+
+.list-item-content {}
+
+.list-item-activity-stream {
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  height: 110px;
+  transition: all 150ms ease;
+}
+
+.list-item-fake-click-activity-stream {
+  // border: gray dashed 1px;
+  position: absolute;
+  height: 100px;
+  width: 50px;
+  background-color: white;
+  right: 0;
+}
+
+.list-item-remove-activity-stream {
+  background-color: red;
+  height: 110px;
+  width: 60px;
+  position: absolute;
+  right: -120px;
+}
+
+.list-item-unfavorite {
+  background-color: #fcc419;
+  height: 110px;
+  width: 60px;
+  position: absolute;
+  right: -61px;
+}
+
+.list-item-show-action-activity-stream {
+  transform: translateX(-120px);
+}
+/**** Mobile Dropdown ****/
+
+.mobile-dropdown {
+  background-color: #ffffff;
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 3;
+
+  &-item {
+    padding: 25px 20px;
+  }
+
+  &-overlay {
+    background: rgba(0, 0, 0, 0.75);
+    display: none;
+    height: 100vh;
+    opacity: 0.5;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+  }
+}
+
+
+// Carousel for "message-history-2.html"
+.carousel {
+  margin-bottom: 125px;
+  background: white;
+}
+
+/* Carousel Controls */
+.carousel-control {
+  left: -12px;
+  height: 40px;
+  width: 40px;
+  background: none repeat scroll 0 0 #222222;
+  border: 4px solid #FFFFFF;
+  border-radius: 23px 23px 23px 23px;
+  margin-top: 190px;
+}
+
+.carousel-control.right {
+  right: -12px;
+}
+
+/* Carousel Indicators */
+.carousel-indicators {
+  right: 50%;
+  border: 3px solid red;
+  margin-right: -19px;
+  margin-top: -50px;
+}
+
+/* The colour of the indicators */
+.carousel-indicators li {
+
+}
+
+.carousel-indicators .active {
+  background: blue;
+}
+
+.messsage-indicators{
+
+}
+
+/**** Recovered List Items ****/
+.list-item-recovered {
+  background-color: #72c3fc;
+  color: #ffffff;
+  margin: 0 !important;
+  padding-left: 15px;
+
+  .c-badge {
+    display: none;
+  }
+
+  .list-item-content {
+    color: #fff;
+  }
+
+}

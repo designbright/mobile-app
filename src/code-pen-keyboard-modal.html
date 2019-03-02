@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>code-pen-keyboard-modal.html Investor Access - Ipreo</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="assets/css/default.css" />
+  <link rel="stylesheet" href="assets/css/mobile.css" />
+</head>
+
+<body class="c-bg-gray-0">
+
+  <!-- **** START HEADER **** -->
+  <header class="header-fixed c-bg-white c-p-top-md">
+    <div class="c-d-flex c-justify-space-between c-align-center c-bd-bottom">
+
+      <!-- START MAIN TOP HEADER -->
+      <div>
+        <a href="favorites.html">
+        <button class="btn-header">
+          <i class="fa fa-angle-left"></i>
+        </button>
+      </a>
+      </div>
+
+      <div>
+        <button class="btn-header"><i class="fa fa-ellipsis-h"></i></button>
+      </div>
+    </div>
+    <!-- END MAIN TOP HEADER -->
+
+    <!--HEADER SUBTITLE  -->
+    <div class="c-p-md c-bd-bottom c-bd-gray-2 c-m-top-0">
+      <h1 class="c-m-0 c-header-xs">Coca Cola Enterprise USD 2 Tranches</h1>
+    </div>
+    <!-- END HEADER SUBTITLE -->
+
+    <!-- HEADER NAV TABS -->
+    <ul class="c-tabs c-tabs-fullwidth">
+      <li class="c-tab-item c-p-left-sm c-p-right-sm">
+        <a class="c-tab-item-link c-tab-item-link-active" href="deal-summary.html">Deal Details</a>
+      </li>
+      <li class="c-tab-item c-p-right-sm">
+        <a class="c-tab-item-link" href="tranches-15-yr-fxd.html">Tranches (2)</a>
+      </li>
+      <li class="c-tab-item c-p-right-sm">
+        <a class="c-tab-item-link" href="message-history-2.html">Messages</a>
+      </li>
+      <li class="c-tab-item c-p-right-sm">
+        <a class="c-tab-item-link" href="audit-trail-1.html">Audit Trail</a>
+      </li>
+    </ul>
+    <!-- END HEADER NAV TABS -->
+
+  </header>
+  <!-- END HEADER -->
+
+  <!-- START MOBILE CONTENT -->
+  <div class="content-mobile c-depth-xs">
+    <div class="content-scroll c-p-bottom-xs">
+
+
+      <!--**** CODE PEN MODAL ****  -->
+
+      <style>
+        textarea {
+          font-size: 12pt;
+          padding: 5px;
+        }
+
+        /* Main styles */
+
+        #keyboard {
+          background: #d1d5db;
+          font-size: 16pt;
+          width: 380px;
+          height: 210px;
+          margin-top: 2px;
+          padding-top: 10px;
+        }
+
+        #lowercase,
+        #uppercase,
+        #numbers,
+        #symbols {
+          position: absolute;
+          z-index: 0;
+        }
+
+        #lowercase {
+          display: block;
+        }
+
+        #uppercase,
+        #numbers,
+        #symbols {
+          display: none;
+        }
+
+        .row {
+          padding: 0.6px;
+          margin-bottom: 5px;
+          text-align: center;
+        }
+
+        /* Third row */
+
+        .row:nth-of-type(3) .gray:first-of-type {
+          margin-right: 10px;
+        }
+
+        .row:nth-of-type(3) .gray:last-of-type {
+          margin-left: 10px;
+        }
+
+        .row:nth-of-type(3) .gray:last-of-type:active {
+          background: #fff;
+        }
+
+        /* Last row */
+
+        .row:last-of-type .key {
+          font-size: 12pt;
+          line-height: 2.7em;
+        }
+
+        .row:last-of-type .gray {
+          width: 88px;
+        }
+
+        .row:last-of-type .white {
+          width: 184px;
+        }
+
+        .row:last-of-type .white:active {
+          background: #aaa;
+        }
+
+        .row:last-of-type .gray:last-of-type:active {
+          background: #fff;
+        }
+
+        /* Keys */
+
+        .key {
+          border-radius: 5px;
+          box-shadow: 0 1px 0 #888;
+          display: inline-block;
+          line-height: 1.9em;
+          height: 42px;
+          position: relative;
+        }
+
+        .white {
+          background: #fff;
+          width: 32px;
+        }
+
+        .gray {
+          background: #acb3bd;
+          width: 40px;
+        }
+
+        /* Key pop-out */
+
+        .popout {
+          display: none;
+          font-size: 24pt;
+          position: absolute;
+          left: -9px;
+          bottom: 38px;
+          z-index: 1;
+        }
+
+        /* align pop-outs for q Q 1 - [ _*/
+
+        #lowercase .row:first-of-type .key:first-of-type .popout,
+        #uppercase .row:first-of-type .key:first-of-type .popout,
+        #numbers .row:nth-child(-n+2) .key:first-of-type .popout,
+        #symbols .row:nth-child(-n+2) .key:first-of-type .popout {
+          left: 0;
+        }
+
+        /* align pop-outs for p P 0 " = • */
+
+        #lowercase .row:first-of-type .key:last-of-type .popout,
+        #uppercase .row:first-of-type .key:last-of-type .popout,
+        #numbers .row:nth-child(-n+2) .key:last-of-type .popout,
+        #symbols .row:nth-child(-n+2) .key:last-of-type .popout {
+          left: -18px;
+        }
+
+        .head {
+          background: #fff;
+          border-top-left-radius: 5px;
+          border-top-right-radius: 5px;
+          box-shadow: 0 -1px 1px #888;
+          line-height: 1.5em;
+          width: 50px;
+          height: 50px;
+        }
+
+        .neck {
+          background: #fff;
+          width: 50px;
+          height: 10px;
+          -webkit-clip-path: polygon(0% 0%, 100% 0%, 80% 100%, 20% 100%);
+          clip-path: polygon(0% 0%, 100% 0%, 80% 100%, 20% 100%);
+        }
+
+        /* adjust width of . , ? ! ' */
+
+        #numbers .row:nth-child(3) .key:nth-child(n+2):nth-child(-n+6) .head,
+        #symbols .row:nth-child(3) .key:nth-child(n+2):nth-child(-n+6) .head,
+        #numbers .row:nth-child(3) .key:nth-child(n+2):nth-child(-n+6) .neck,
+        #symbols .row:nth-child(3) .key:nth-child(n+2):nth-child(-n+6) .neck {
+          width: 64px;
+        }
+
+        /* alter necks for q Q 1 - [ _ */
+
+        #lowercase .row:first-of-type .key:first-of-type .neck,
+        #uppercase .row:first-of-type .key:first-of-type .neck,
+        #numbers .row:nth-child(-n+2) .key:first-of-type .neck,
+        #symbols .row:nth-child(-n+2) .key:first-of-type .neck {
+          -webkit-clip-path: polygon(0% 0%, 100% 0%, 67% 100%, 0% 100%);
+          clip-path: polygon(0% 0%, 100% 0%, 67% 100%, 0% 100%);
+        }
+
+        /* alter necks for p P 0 " [ = • */
+
+        #lowercase .row:first-of-type .key:last-of-type .neck,
+        #uppercase .row:first-of-type .key:last-of-type .neck,
+        #numbers .row:nth-child(-n+2) .key:last-of-type .neck,
+        #symbols .row:nth-child(-n+2) .key:last-of-type .neck {
+          -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 33% 100%);
+          clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 33% 100%);
+        }
+      </style>
+
+
+      <div class="c-m-top-xl"></div>
+      <!--typing area-->
+      <textarea class="c-m-horizontal-sm" cols="41" rows="5" readonly></textarea>
+
+      <div id="keyboard" class="">
+        <!--lowercase keyboard-->
+        <div id="lowercase">
+          <div class="row c-m-left-0 c-p-left-0">
+            <div class="key white">
+              <span>q</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>w</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>e</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>r</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>t</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>y</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>u</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>i</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>o</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>p</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="key white">
+              <span>a</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>s</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>d</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>f</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>g</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>h</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>j</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>k</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>l</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="key gray">
+              <span>&#8679;</span>
+            </div>
+            <div class="key white">
+              <span>z</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>x</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>c</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>v</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>b</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>n</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>m</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key gray">
+              <span>&#9003;</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="key gray">
+              <span>123</span>
+            </div>
+            <div class="key white">
+              <span>space</span>
+            </div>
+            <div class="key gray">
+              <span>return</span>
+            </div>
+          </div>
+        </div>
+        <!--uppercase keyboard-->
+        <div id="uppercase">
+          <div class="row">
+            <div class="key white">
+              <span>Q</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>W</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>E</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>R</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>T</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>Y</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>U</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>I</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>O</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>P</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="key white">
+              <span>A</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>S</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>D</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>F</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>G</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>H</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>J</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>K</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>L</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="key gray" style="background:#fff;">
+              <span>&#11014;</span>
+            </div>
+            <div class="key white">
+              <span>Z</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>X</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>C</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>V</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>B</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>N</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>M</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key gray">
+              <span>&#9003;</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="key gray">
+              <span>123</span>
+            </div>
+            <div class="key white">
+              <span>space</span>
+            </div>
+            <div class="key gray">
+              <span>return</span>
+            </div>
+          </div>
+        </div>
+        <!--numbers and symbols keyboard-->
+        <div id="numbers">
+          <div class="row">
+            <div class="key white">
+              <span>1</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>2</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>3</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>4</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>5</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>6</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>7</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>8</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>9</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>0</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="key white">
+              <span>-</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>/</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>:</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>;</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>(</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>)</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>$</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>&amp;</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>@</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>"</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="key gray" style="font-size:10pt;line-height:3.4em;">
+              <span>#+=</span>
+            </div>
+            <div class="key white" style="width:46px;">
+              <span>.</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white" style="width:47px;">
+              <span>,</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white" style="width:47px;">
+              <span>?</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white" style="width:47px;">
+              <span>!</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white" style="width:47px;">
+              <span>'</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key gray">
+              <span>&#9003;</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="key gray">
+              <span>ABC</span>
+            </div>
+            <div class="key white">
+              <span>space</span>
+            </div>
+            <div class="key gray">
+              <span>return</span>
+            </div>
+          </div>
+        </div>
+        <!--additional symbols keyboard-->
+        <div id="symbols">
+          <div class="row">
+            <div class="key white">
+              <span>[</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>]</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>{</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>}</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>#</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>%</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>^</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>*</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>+</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>=</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="key white">
+              <span>_</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>\</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>|</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>~</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>&lt;</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>&gt;</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>&euro;</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>&pound;</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>&yen;</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white">
+              <span>&bull;</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="key gray" style="font-size:10pt;line-height:3.4em;">
+              <span>123</span>
+            </div>
+            <div class="key white" style="width:46px;">
+              <span>.</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white" style="width:47px;">
+              <span>,</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white" style="width:47px;">
+              <span>?</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white" style="width:47px;">
+              <span>!</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key white" style="width:47px;">
+              <span>'</span>
+              <div class="popout">
+                <div class="head"></div>
+                <div class="neck"></div>
+              </div>
+            </div>
+            <div class="key gray">
+              <span>&#9003;</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="key gray">
+              <span>ABC</span>
+            </div>
+            <div class="key white">
+              <span>space</span>
+            </div>
+            <div class="key gray">
+              <span>return</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--**** END CODE PEN MODAL ****  -->
+
+
+
+
+
+
+
+
+
+
+      <section>
+
+        <div class="c-container">
+          <div class="c-row">
+            <div class="c-col">
+              <h2 class="c-text-md c-text-bold c-m-top-lg c-m-bottom-sm">Deal Details</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="c-card">
+          <div class="c-card-content">
+            <table class="c-table c-m-0">
+              <tbody>
+                <tr>
+                </tr>
+                <tr>
+                  <td class="c-text-bold">Issuer</td>
+                  <td class="c-text-right">Coca Cola Enterprise</td>
+                </tr>
+                <tr>
+                  <td class="c-text-bold">Ratings</td>
+                  <td class="c-text-right">-</td>
+                </tr>
+                <tr>
+                  <td class="c-p-left-lg c-text-gray-5">Moody's</td>
+                  <td class="c-text-right">Aaa</td>
+                </tr>
+                <tr>
+                  <td class="c-p-left-lg c-text-gray-5">S&P</td>
+                  <td class="c-text-right">AAA</td>
+                </tr>
+                <tr>
+                  <td class="c-p-left-lg c-text-gray-5">Fitch</td>
+                  <td class="c-text-right">AAA</td>
+                </tr>
+                <tr>
+                  <td class="c-text-bold">Currency</td>
+                  <td class="c-text-right">USD</td>
+                </tr>
+                <tr>
+                  <td class="c-text-bold">Issuer Country</td>
+                  <td class="c-text-right">Malaysia</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- START DOCUMENTS SECTION -->
+        <div class="c-container">
+          <div class="c-row">
+            <div class="c-col">
+              <h2 class="c-text-md c-text-bold c-m-top-md">Documents</h2>
+            </div>
+          </div>
+        </div>
+        <div class="c-card c-m-bottom-md">
+          <div class="c-card-content">
+            <div class="c-bg-gray-0 c-p-md">
+              <div class="c-row">
+                <div class="c-col c-align-center c-text-center">
+                  <span class="c-text-gray-5 icon-xxl">
+                          <i class="fa fa-file-text-o"></i>
+                        </span>
+                  <p class="c-body-text c-text-gray-6">No Documents Available</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.c-card -->
+        <!-- END DOCUMENTS SECTION -->
+
+        <!-- START INTERNAL COMMENTS SECTION -->
+        <div class="c-container">
+          <div class="c-row c-row-align-center">
+            <div class="c-col">
+              <h2 class="c-text-md c-text-bold">Internal Comments (17)</h2>
+            </div>
+            <div class="c-col c-text-right">
+              <a class="c-text-bold c-a c-text-md" href>Read All</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="c-card">
+          <div class="c-card-content">
+            <div class="c-media-list c-media-list-divided">
+
+              <div class="c-media c-p-0 c-p-bottom-md">
+                <span class="c-avatar c-avatar-secondary" data-text="JR"></span>
+                <div class="c-media-body c-text-sm">
+                  <div><b>Jason Reynolds</b> <span class="c-text-italic c-text-muted">3:14 PM</span></div>
+                  <p>Donec cursus sem eget tellus ultrices vestibulum. Nam vitae dui in ipsum fermentum tristique vel a magna.</p>
+                </div>
+              </div>
+
+              <div class="c-media c-p-horizontal-0 c-p-vertical-md">
+                <span class="c-avatar c-avatar-secondary" data-text="LG"></span>
+                <div class="c-media-body c-text-sm">
+                  <div><b>Linda Guzman</b> <span class="c-text-italic c-text-muted">3:14 PM</span></div>
+                  <p>Donec cursus sem eget tellus ultrices vestibulum. Nam vitae dui in ipsum fermentum tristique vel a magna.</p>
+                </div>
+              </div>
+
+              <div class="c-media c-p-horizontal-0 c-p-vertical-md">
+                <span class="c-avatar c-avatar-secondary" data-text="JC"></span>
+                <div class="c-media-body c-text-sm">
+                  <div><b>Joseph Cox</b> <span class="c-text-italic c-text-muted">3:14 PM</span></div>
+                  <p>Duis ultricies non ligula quis tempor. Aliquam molestie ipsum placerat lacus finibus, sagittis commodo turpis congue. Nullam fermentum, nisl ut maximus lacinia, massa enim venenatis nunc, nec euismod erat turpis ut nisl.</p>
+                  <p>Phasellus hendrerit turpis sit amet felis bibendum vestibulum eu pellentesque mi.</p>
+                </div>
+              </div>
+              <!-- END INTERNAL COMMENTS SECTION -->
+
+            </div>
+            <!-- /.c-media-list -->
+
+            <!-- ADD COMMENT BUTTON -->
+            <button class="c-btn c-btn-secondary c-btn-block c-btn-lg" id="add-comment">
+              <i class="fa fa-comments"></i> Add Comment
+            </button>
+            <!-- END ADD COMMENT BUTTON -->
+
+            <!-- COMMENT TEXTAREA -->
+            <div id="new-comment" name="new-comment" style="display:none;">
+              <textarea id="user-clicks-textarea" class="c-input c-m-vertical-md c-bg-gray-0 c-bd-bottom-0" rows="6" id="comment-field"></textarea>
+
+              <!-- **** START KEYBOARD MODAL **** -->
+              <div id="ios-keyboard-modal" class="modal ios-keyboard-image ">
+              </div>
+
+
+              <div class="success-overlay" id="success-overlay" onclick="off()">
+                <div class="success-overlay-content c-text-center">
+                  <i class="fa fa-check-circle-o fa-5x"></i>
+                  <h2>Success!</h2>
+                  <p class="c-m-horizontal-xl">Your comment has been saved and alerts have been sent.</p>
+                </div>
+              </div>
+              <!-- **** END KEYBOARD MODAL ****  -->
+
+              <!-- CANCEL AND SAVE COMMENT BUTTON GROUP -->
+              <button class="c-btn c-btn-secondary c-btn-block c-btn-lg c-m-vertical-sm">Cancel</button>
+              <button class="c-btn c-btn-primary c-btn-block c-btn-lg" id="confirm" onclick="on()">Save Comment</button>
+              <!-- END CANCEL AND SAVE COMMENT BUTTON GROUP -->
+            </div>
+          </div>
+        </div>
+
+    </div>
+    <!-- /.content-scroll -->
+  </div>
+  <!-- /.c-content-mobile -->
+
+
+  <!-- **** FOOTER **** -->
+  <footer class="footer-mobile">
+    <ul class="c-tabs tabs-mobile">
+      <li class="c-tab-item">
+        <a class="c-tab-item-link c-tab-item-link-active c-p-md" href="favorites.html">
+          <i class="fa fa-globe fa-lg c-m-right-sm" aria-hidden="true"></i> Deal Monitor
+        </a>
+      </li>
+      <li class="c-tab-item">
+        <a class="c-tab-item-link c-p-md" href="activity-stream.html">
+          <i class="fa fa-bolt fa-lg c-m-right-sm" aria-hidden="true"></i> Activity Stream
+        </a>
+      </li>
+    </ul>
+  </footer>
+  <!-- **** END FOOTER **** -->
+
+  <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+  <script src="assets/js/main.js"></script>
+
+  <!-- When user clicks on "Add Comment" button, open the textarea  -->
+  <script>
+    $(document).ready(function() {
+      // Show Add Comment Panel
+      $("#add-comment").on("click", function() {
+        $("#new-comment").show();
+        scrollToAnchor('new-comment');
+      })
+
+      function scrollToAnchor(aid) {
+        var tag = $("div[name='" + aid + "']");
+        $('.content-scroll').animate({
+          scrollTop: tag.offset().top
+        });
+      }
+    })
+  </script>
+  <!-- End "Add Comment" script  -->
+
+  <!--IOS KEYBOARD MODAL  -->
+  <!--When user clicks on comment textarea, show keyboard modal -->
+  <script>
+    // Get the modal
+    var iosKeyboardModal = document.getElementById('ios-keyboard-modal');
+
+    // Trigger/Open Keyboard Modal when user clicks inside textarea
+    var userClicksTextarea = document.getElementById("user-clicks-textarea");
+
+    var confirm = document.getElementById("confirm");
+
+    // When the user clicks the "Alert Participants" button, open the modal
+    userClicksTextarea.onclick = function() {
+      toggleModal();
+    }
+
+    $(".modal-overlay").on("click", function() {
+      toggleModal();
+    })
+
+    function toggleModal() {
+      $("#ios-keyboard-modal").toggleClass("modal-open");
+      $(".modal-overlay").toggleClass("modal-overlay-open");
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    // span.onclick = function() {
+    //   modal.style.display = "none";
+    // }
+
+    // When the user clicks anywhere outside of the modal, close it
+    // window.onclick = function(event) {
+    //   if (event.target == modal) {
+    //     modal.style.display = "none";
+    //   }
+    // }
+
+    // When the user clicks the "Confirm" button in the upper right hand corner, close the modal and then display "Success" overlay
+    // confirm.onclick = function on() {
+    //   modal.style.display = "none";
+    //   document.getElementById("overlay").style.display = "block";
+    // }
+
+    // When the user clicks the "Confirm" button in upper right hand corner, display "Success" overlay
+    function on() {
+      document.getElementById("overlay").style.display = "block";
+      modal.style.display = "none";
+
+    }
+
+    //User exits "Success" overlay screen when it is clicked on
+    function off() {
+      $("#success-overlay").removeClass("success-overlay-open");
+    }
+
+    $("#confirm-alert-participants").on("click", function() {
+      // hide alert modal
+      toggleModal();
+      // Show confirmation overlay
+      setTimeout(function() {
+        $(".success-overlay").addClass("success-overlay-open");
+      }, 300);
+    })
+  </script>
+  <!-- END KEYBOARD MODAL -->
+
+  <script>
+    var isShift = false,
+      capsLock = false,
+      isNumSymbols = false,
+      isMoreSymbols = false;
+
+    var kbdMode = ["lowercase", "uppercase", "numbers", "symbols"];
+
+    /* typing */
+    for (var i = 0; i < kbdMode.length; ++i) {
+      $("#" + kbdMode[i] + " .row .white:not(:last)").mousedown(function() {
+        $("textarea").append($(this).find("span").html().substring(0, 1));
+        $(this).find(".popout").css("display", "block");
+        $(this).find(".popout .head").html($(this).find("span").html().substring(0, 1));
+        $(this).find("span").css("color", "transparent");
+      });
+      $("#" + kbdMode[i] + " .row .white:last").mousedown(function() {
+        $("textarea").append("&#32;");
+      });
+    }
+    $(".white").mouseup(function() {
+      $(this).find(".popout").css("display", "none");
+      $(this).find(".popout .head").html("");
+      $(this).find("span").css("color", "#000");
+      if (isShift == true && capsLock == false) {
+        $("#lowercase").css("display", "block");
+        $("#uppercase").css("display", "none");
+        isShift = false;
+      }
+    });
+
+    /* toggle shift */
+    // lowercase to uppercase
+    $("#lowercase .row:eq(2) .gray:eq(0)").click(function() {
+      if (isShift == false) {
+        $("#lowercase").css("display", "none");
+        $("#uppercase").css("display", "block");
+        isShift = true;
+      }
+    });
+    // uppercase to lowercase
+    $("#uppercase .row:eq(2) .gray:eq(0)").click(function() {
+      if (isShift == true) {
+        $("#lowercase").css("display", "block");
+        $("#uppercase").css("display", "none");
+        isShift = false;
+      }
+    });
+    // caps lock on
+    $("#uppercase .row:eq(2) .gray:eq(0)").dblclick(function() {
+      if (capsLock == false) {
+        $("#lowercase").css("display", "none");
+        $("#uppercase").css("display", "block");
+        $(this).children("span").html("&#8682;");
+        capsLock = true;
+      }
+    });
+    // caps lock off
+    $("#uppercase .row:eq(2) .gray:eq(0)").click(function() {
+      if (capsLock == true) {
+        $("#lowercase").css("display", "block");
+        $("#uppercase").css("display", "none");
+        $(this).children("span").html("&#11014;");
+        capsLock = false;
+      }
+    });
+
+    /* backspace */
+    var backspace = function() {
+      $("textarea").html($("textarea").html().substring(0, $("textarea").html().length - 1));
+    };
+    for (var j = 0; j < kbdMode.length; ++j) {
+      $("#" + kbdMode[j] + " .row:eq(2) .key:last").click(backspace);
+    };
+
+    /* toggle numbers */
+    // lowercase/uppercase to numbers
+    for (var k = 0; k < kbdMode.length - 2; ++k) {
+      $("#" + kbdMode[k] + " .row:eq(3) .gray:eq(0)").click(function() {
+        if (isNumSymbols == false) {
+          $("#numbers").css("display", "inherit");
+          $("#lowercase").css("display", "none");
+          $("#uppercase").css("display", "none");
+          $("#uppercase .row:eq(2) .gray:eq(0)").children("span").html("&#11014;");
+          isNumSymbols = true;
+          isShift = false;
+          capsLock = false;
+        }
+      });
+    }
+    // numbers to lowercase
+    $("#numbers .row:eq(3) .gray:eq(0)").click(function() {
+      if (isNumSymbols == true) {
+        $("#numbers").css("display", "none");
+        $("#lowercase").css("display", "block");
+        isNumSymbols = false;
+      }
+    });
+
+    /* toggle symbols */
+    // numbers to symbols
+    $("#numbers .row:eq(2) .gray:eq(0)").click(function() {
+      if (isMoreSymbols == false) {
+        $("#numbers").css("display", "none");
+        $("#symbols").css("display", "block");
+        isMoreSymbols = true;
+      }
+    });
+    // symbols to numbers
+    $("#symbols .row:eq(2) .gray:eq(0)").click(function() {
+      if (isMoreSymbols == true) {
+        $("#numbers").css("display", "block");
+        $("#symbols").css("display", "none");
+        isMoreSymbols = false;
+      }
+    });
+    // symbols to lowercase
+    $("#symbols .row:eq(3) .gray:eq(0)").click(function() {
+      if (isMoreSymbols == true) {
+        $("#lowercase").css("display", "block");
+        $("#symbols").css("display", "none");
+        isMoreSymbols = false;
+      }
+    });
+
+    /* return (line break) */
+    for (var l = 0; l < kbdMode.length; ++l) {
+      $("#" + kbdMode[l] + " .row:eq(3) .gray:eq(1)").click(function() {
+        $("textarea").append("&#10;");
+      });
+    }
+  </script>
+
+
+</body>
+
+</html>

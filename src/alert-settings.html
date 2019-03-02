@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>ALERT-SETTINGS.html Investor Access - Ipreo</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="assets/css/default.css" />
+  <link rel="stylesheet" href="assets/css/mobile.css" />
+</head>
+
+<body class="c-bg-gray-0">
+
+  <!-- ****START HEADER**** -->
+  <header class="header-fixed c-bg-white c-p-top-md">
+
+    <div class="c-d-flex c-justify-space-between c-align-center c-m-bottom-0">
+      <div>
+        <a href="favorites.html">
+        <button class="btn-header">
+          <i class="fa fa-angle-left"></i>
+        </button>
+      </a>
+      </div>
+
+      <div class="c-header-xs">Alert Settings</div>
+      <div>
+        <button class="btn-header"><i class="fa fa-ellipsis-h"></i></button>
+      </div>
+    </div>
+    <!-- END HEADER MAIN NAVIGATION -->
+
+    <!-- START HEADER SEARCH SECTION-->
+    <div class="c-p-md c-p-top-0 c-m-top-sm c-bd-bottom ">
+      <div class="c-input-container">
+        <i class="fa fa-search c-input-icon"></i>
+        <input type="text" placeholder="Search All Deals" class="c-input">
+        <i class="fa fa-microphone c-input-icon"></i>
+      </div>
+    </div>
+    <!-- END HEADER SEARCH -->
+
+  </header>
+  <!--**** END HEADER ****  -->
+
+  <div class="content-mobile c-depth-xs">
+    <div class="content-scroll c-p-bottom-xs">
+
+      <div class="c-col c-m-top-lg">
+        <!-- <h2 class="c-text-md c-text-bold c-m-top-lg c-m-bottom-sm">Deal Summary</h2> -->
+      </div>
+
+      <div class="c-media-list c-media-list-divided c-bg-white">
+
+        <!-- Media List Item -->
+        <div class="c-media c-media-middle c-media-action-visible c-p-vertical-lg">
+          <div class="c-media-body">
+            <div class="c-text-md c-text-bold">Enable Internal Comment Alerts</div>
+          </div>
+          <label class="c-checkbox-lg">
+              <input type="checkbox" name="radio" unchecked>
+              <i class="c-bg-primary"></i>
+            </label>
+        </div>
+        <!-- End Media List Item -->
+
+        <!-- Media List Item -->
+        <div class="c-media c-media-middle c-media-action-visible c-p-vertical-lg">
+          <div class="c-media-body">
+            <div class="c-text-md c-text-bold">Enable Activity Stream Alerts</div>
+          </div>
+          <label class="c-checkbox-lg">
+              <input type="checkbox" name="radio" unchecked>
+              <i class="c-bg-primary"></i>
+            </label>
+        </div>
+        <!-- End Media List Item -->
+
+        <!-- Media List Item -->
+        <div class="c-media c-media-middle c-media-action-visible c-p-vertical-lg">
+          <div class="c-media-body">
+            <div class="c-text-md c-text-bold">Hide Internal Comment Alert Content</div>
+          </div>
+          <label class="c-checkbox-lg">
+              <input type="checkbox" name="radio" unchecked>
+              <i class="c-bg-primary"></i>
+            </label>
+        </div>
+        <!-- End Media List Item -->
+
+        <!-- Media List Item -->
+        <div class="c-media c-media-middle c-media-action-visible c-p-vertical-lg">
+          <div class="c-media-body">
+            <div class="c-text-md c-text-bold">Hide Activity Stream Alert Content</div>
+          </div>
+          <label class="c-checkbox-lg">
+              <input type="checkbox" name="radio" unchecked>
+              <i class="c-bg-primary"></i>
+            </label>
+        </div>
+        <!-- End Media List Item -->
+
+        <div class="modal-overlay"></div>
+
+        <div class="success-overlay" id="success-overlay" onclick="off()">
+          <div class="success-overlay-content c-text-center">
+            <i class="fa fa-check-circle-o fa-5x"></i>
+            <p class="c-m-horizontal-xl c-text-large">Your changes have been saved!</p>
+          </div>
+        </div>
+
+      </div>
+      <!-- /.c-media-list -->
+    </div>
+    <!-- /.content-scroll -->
+  </div>
+  <!-- /.c-content-mobile -->
+
+  <footer class="footer-mobile">
+    <ul class="c-tabs tabs-mobile">
+      <li class="c-tab-item">
+        <button id="save-changes" class="c-btn c-bg-white c-btn-block c-btn-lg c-btn-link c-bd-top" onclick="on()">Save Changes</button>
+      </li>
+    </ul>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    // Get the modal
+    var modal = document.getElementById('myModal');
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("save-changes");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    var confirm = document.getElementById("confirm");
+
+    // When the user clicks the "Alert Participants" button, open the modal
+    btn.onclick = function() {
+      toggleModal();
+    }
+
+    $(".modal-overlay").on("click", function() {
+      toggleModal();
+    })
+
+    function toggleModal() {
+      $(".modal-overlay").toggleClass("modal-overlay-open");
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    // span.onclick = function() {
+    //   modal.style.display = "none";
+    // }
+
+    // When the user clicks anywhere outside of the modal, close it
+    // window.onclick = function(event) {
+    //   if (event.target == modal) {
+    //     modal.style.display = "none";
+    //   }
+    // }
+
+    // When the user clicks the "Confirm" button in the upper right hand corner, close the modal and then display "Success" overlay
+    // confirm.onclick = function on() {
+    //   modal.style.display = "none";
+    //   document.getElementById("overlay").style.display = "block";
+    // }
+
+    // When the user clicks the "Confirm" button in upper right hand corner, display "Success" overlay
+    function on() {
+      document.getElementById("overlay").style.display = "block";
+      modal.style.display = "none";
+
+    }
+
+    //User exits "Success" overlay screen when it is clicked on
+    function off() {
+      $("#success-overlay").removeClass("success-overlay-open");
+    }
+
+    $("#save-changes").on("click", function() {
+      // hide alert modal
+      toggleModal();
+      // Show confirmation overlay
+      setTimeout(function() {
+        $(".success-overlay").addClass("success-overlay-open");
+      }, 300);
+
+    })
+  </script>
+
+</body>
+
+</html>

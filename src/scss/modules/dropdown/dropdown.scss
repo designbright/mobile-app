@@ -1,0 +1,87 @@
+@import "mixins";
+
+.c-dropdown {
+  position: relative;
+  overflow: visible;
+  display: inline-block;
+
+  &-right {
+    float: right;
+  }
+}
+
+.c-dropdown-list {
+  @include dropdown-list;
+
+  &-right {
+    right: 0;
+    left: auto;
+  }
+
+  &-below {
+    top: 110%;
+
+    @if $dropdown-glued {
+      border-radius: 0 0 $dropdown-radius $dropdown-radius;
+    }
+  }
+
+  &-above {
+    bottom: 110%;
+    margin-bottom: 0;
+    top: auto;
+
+    @if $dropdown-glued {
+      border-radius: $dropdown-radius $dropdown-radius 0 0;
+    }
+  }
+}
+
+
+.c-dropdown-divider {
+  border-top: $dropdown-border;
+
+  > a {
+    margin-top: $dropdown-divider-margin;
+  }
+}
+
+.c-dropdown-list > li > a,
+.c-dropdown-item {
+  @include dropdown-item;
+}
+
+
+.c-dropdown-grid {
+  @include dropdown-grid;
+
+  li a,
+  .c-dropdown-item {
+    @include dropdown-grid-item;
+  }
+
+  &-col-2 {
+    width: 200px;
+
+    li a,
+    .c-dropdown-item {
+      flex-basis: 50%;
+    }
+  }
+
+  &-col-4 {
+    width: 400px;
+
+    li a,
+    .c-dropdown-item {
+      flex-basis: 25%;
+    }
+  }
+}
+
+.c-dropdown-grid-right {
+  right: 0;
+  left: auto;
+  position: absolute;
+  min-width: 300px;
+}

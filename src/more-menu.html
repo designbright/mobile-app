@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>MORE-MENU.html Investor Access - Ipreo</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="assets/css/default.css" />
+  <link rel="stylesheet" href="assets/css/mobile.css" />
+</head>
+
+<body class="c-bg-gray-0">
+
+  <!-- START HEADER -->
+  <header class="header-fixed c-bg-white c-p-top-md">
+    <div class="c-d-flex c-justify-space-between c-align-center c-p-right-md c-bd-bottom">
+
+      <!-- START MAIN TOP HEADER -->
+      <div>
+        <a href="favorites.html">
+           <button class="btn-header">
+             <i class="fa fa-angle-left"></i>
+           </button>
+         </a>
+      </div>
+
+      <div class="c-header-xs">
+        Coca Cola Enterprise USD 2...
+      </div>
+
+      <div id="toggle-more-menu">
+        <span class="toggleValue"><i class="fa fa-ellipsis-h c-text-primary-5"></i></span>
+      </div>
+    </div>
+    <!-- END MAIN TOP HEADER -->
+  </header>
+  <!-- END HEADER -->
+
+  <div class="content-mobile c-depth-xs">
+    <div class="content-scroll c-p-bottom-xs">
+
+      <div class="c-container">
+        <div class="c-row">
+          <div class="c-col">
+
+            <div class="c-p-top-0 c-m-bottom-md">
+
+              <div class="c-media c-p-0" id="toggle">
+
+                <div class="c-media-list c-media-list-divided mobile-dropdown c-m-0">
+                  <div class="c-media mobile-dropdown-item" data-tranche="15">
+                    <span class="c-text-md c-text-bold">Hidden Deals</span>
+                  </div>
+                  <div class="c-media mobile-dropdown-item" data-tranche="20">
+                    <span class="c-text-md c-text-bold">Account Settings</span>
+                  </div>
+                  <div class="c-media mobile-dropdown-item" data-tranche="20">
+                    <span class="c-text-md c-text-bold">Alert Settings</span>
+                  </div>
+                  <div class="c-media mobile-dropdown-item" data-tranche="20">
+                    <span class="c-text-md c-text-bold">Logout</span>
+                  </div>
+                </div>
+                <!-- /.dropdown -->
+              </div>
+              <!-- /.c-media -->
+            </div>
+
+          </div>
+          <!--END C-COL  -->
+
+        </div>
+        <!--END C-ROW  -->
+
+      </div>
+      <!-- END C-CONTAINER -->
+
+      <div class="mobile-dropdown-overlay"></div>
+
+
+      <!-- <div class="c-card tranche-card" id="tranche-15">
+                <div class="c-card-content">
+
+                </div>
+              </div> -->
+      <!-- /#tranche-15 -->
+
+      <!-- <div class="c-card tranche-card" id="tranche-20" style="display:none;">
+                <div class="c-card-content">
+
+                </div>
+              </div> -->
+      <!-- /#tranche-20 -->
+
+
+      <!-- <div class="c-media-list c-media-list-divided c-bg-white c-m-top-md">
+
+          <a class="c-media c-media-middle c-media-action-visible c-p-horizontal-sm" href="">
+            <div class="c-media-body">
+              <div class="c-text-md ">Hidden Deals</div>
+            </div>
+          </a>
+
+          <a class="c-media c-media-middle c-media-action-visible c-p-horizontal-sm" href="">
+            <div class="c-media-body">
+              <div class="c-text-md ">Account Settings</div>
+            </div>
+          </a>
+
+          <a class="c-media c-media-middle c-media-action-visible c-p-horizontal-sm" href="">
+            <div class="c-media-body">
+              <div class="c-text-md ">Alert Settings</div>
+            </div>
+          </a>
+
+          <a class="c-media c-media-middle c-media-action-visible c-p-horizontal-sm" href="">
+            <div class="c-media-body">
+              <div class="c-text-md ">Logout</div>
+            </div>
+          </a>
+        </div> -->
+
+
+    </div>
+    <!-- /.content-scroll -->
+  </div>
+  <!-- /.c-content-mobile -->
+
+  <footer class="footer-mobile">
+    <ul class="c-tabs tabs-mobile">
+      <li class="c-tab-item">
+        <a class="c-tab-item-link c-tab-item-link-active c-p-md" href="favorites.html">
+            <i class="fa fa-globe fa-lg c-m-right-sm" aria-hidden="true"></i> Deal Monitor
+          </a>
+      </li>
+      <li class="c-tab-item">
+        <a class="c-tab-item-link c-p-md" href="activity-stream.html">
+            <i class="fa fa-bolt fa-lg c-m-right-sm" aria-hidden="true"></i> Activity Stream
+          </a>
+      </li>
+    </ul>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    $(document).ready(function() {
+
+      var $toggleMoreMenu = $("#toggle-more-menu");
+      var $toggleValue = $("#toggleValue");
+      var $dropdown = $(".mobile-dropdown")
+      var $dropdownItem = $(".mobile-dropdown-item");
+
+      $toggleMoreMenu.on("click", function() {
+        $dropdown.slideToggle(200);
+        $(".mobile-dropdown-overlay").fadeToggle(200);
+      })
+
+      $dropdownItem.on("click", function(event) {
+        var tranche = $(this).data("tranche");
+        var dropdownValue = $(this).find("span").html();
+        $toggleValue.html(dropdownValue);
+        $dropdown.slideToggle(200);
+        $(".tranche-card").hide();
+        $("#tranche-" + tranche).show();
+        event.stopPropagation();
+        $(".mobile-dropdown-overlay").fadeToggle(200);
+      })
+
+    })
+  </script>
+
+</body>
+
+</html>

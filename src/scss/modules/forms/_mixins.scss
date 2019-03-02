@@ -1,0 +1,122 @@
+@mixin label {
+  display: block;
+  width: 100%;
+  padding: $control-label-padding;
+  color: $control-color;
+  font-size: $control-font-size;
+}
+
+@mixin input {
+  display: block;
+  width: 100%;
+  height: $control-height;
+  padding: $control-padding-v $control-padding-h;
+  border: $control-border-width solid $control-border;
+  border-radius: $control-border-radius;
+  outline: 0;
+  color: $control-color;
+  background-color: $control-background;
+  font-family: inherit;
+  font-size: $control-font-size;
+  font-weight: $control-font-weight;
+  line-height: $control-line-height;
+  box-shadow: $control-shadow;
+  resize: vertical;
+  appearance: none;
+  transition: $control-transition;
+
+  &::placeholder {
+    color: $control-placeholder-c;
+    transition: $control-transition;
+  }
+
+  &:hover,
+  &#{&}-hover {
+    border-color: $control-hover-border;
+
+    &::placeholder {
+      color: $control-placeholder-hover-c;
+    }
+  }
+
+  &:focus,
+  &#{&}-focus {
+    border-color: $control-active-border;
+  }
+
+  &[disabled],
+  &-disabled {
+    &,
+    &:hover {
+      @include input-disabled;
+    }
+
+    & ~ .c-input-icon {
+      color: $control-disabled-border;
+    }
+  }
+
+  &-inline {
+    display: inline;
+    width: auto;
+  }
+
+  &-container {
+    position: relative;
+  }
+}
+
+@mixin select-input {
+  $dropdown-arrow: $control-select-background-img $control-select-background-pos no-repeat;
+
+  background: $dropdown-arrow, $control-select-background;
+  border-color: $control-select-border-c;
+  box-shadow: $control-select-shadow;
+  cursor: pointer;
+  user-select: none;
+
+  &::-ms-expand {
+    display: none;
+  }
+
+  &:focus::-ms-value {
+    color: $control-color;
+    background-color: transparent;
+  }
+
+  &:hover,
+  &.c-input-hover {
+    background: $dropdown-arrow, $control-select-background-hover;
+  }
+
+  &:active,
+  &.c-input-active {
+    background: $dropdown-arrow, $control-select-background-active;
+    box-shadow: $control-select-shadow-active;
+  }
+
+  &[disabled],
+  &.c-input-disabled {
+    &,
+    &:hover,
+    &:active {
+      @include input-disabled;
+
+      background: $control-select-background-img-disabled $control-select-background-pos no-repeat, $control-disabled-background;
+      box-shadow: none;
+    }
+  }
+}
+
+
+@mixin input-disabled {
+  border-color: $control-disabled-border;
+  background-color: $control-disabled-background;
+  box-shadow: $control-shadow-disabled;
+  cursor: not-allowed;
+  color: $control-placeholder-c;
+
+  &::placeholder {
+    color: $control-placeholder-c;
+  }
+}
